@@ -1,1 +1,1 @@
-Use through link: https://htmlpreview.github.io/?https://github.com/cheunglaptinggg/image-grid-builder/blob/main/index.html
+Use through link: https://github.com/cheunglaptinggg/Dog-Inn-Photo-Frame.git
