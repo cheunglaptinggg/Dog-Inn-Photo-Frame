@@ -121,11 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
              background: { type: 'image', url: 'templates/doginn-template-strawberry_bot.png' } // 
          },
         {
-             name: "2 Photos - Side by Side", url: "templates/doginn-template-cny_top.png",
+             name: "Beach",
              margins: { top: 350, bottom: 80, left: 65, right: 65 },
              padding: { top: 50, bottom: 50, left: 50, right: 50 },
-             background: { type: 'image', url: 'templates/doginn-template-cny_bot.png' },
-             layout: "2-horizontal"
+             background: { type: 'image', url: 'templates/doginn-template-beach.png' },
+             layout: "2-vertical"
          }
     ];
 
