@@ -122,9 +122,10 @@ document.addEventListener('DOMContentLoaded', () => {
          },
         {
             name: "Beach",
-            url: "templates/doginn-template-beach.png",
+            url: "templates/doginn-template-beach_top.png",
             margins: { top: 228, bottom: 433, left: 199, right: 201 },
             padding: { top: 0, bottom: 0, left: 0, right: 0 },
+            background: { type: 'image', url: 'templates/doginn-template-beach_bot.png' },
             layout: "2-custom",
             slots: [
                 { xPct: 0.412, yPct: 0.000, wPct: 0.588, hPct: 0.356 },  // top-right frame
