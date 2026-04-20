@@ -509,33 +509,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // layout undefined / "4-grid" -> existing 2x2 behaviour (4 slots)
     // layout "2-horizontal"       -> 2 slots side by side
     // layout "2-vertical"         -> 2 slots stacked
-    function getSlotPositions(gridAreaX, gridAreaY, gridAreaWidth, gridAreaHeight, layout) {
-        if (layout === "2-horizontal") {
-            const slotW = gridAreaWidth / 2;
-            const slotH = gridAreaHeight;
-            return [
-                { x: gridAreaX,          y: gridAreaY, w: slotW, h: slotH },
-                { x: gridAreaX + slotW,  y: gridAreaY, w: slotW, h: slotH }
-            ];
-        } else if (layout === "2-vertical") {
-            const slotW = gridAreaWidth;
-            const slotH = gridAreaHeight / 2;
-            return [
-                { x: gridAreaX, y: gridAreaY,          w: slotW, h: slotH },
-                { x: gridAreaX, y: gridAreaY + slotH,  w: slotW, h: slotH }
-            ];
-        } else {
-            // Default: 2x2 grid (existing behaviour, unchanged)
-            const quadW = gridAreaWidth / 2;
-            const quadH = gridAreaHeight / 2;
-            return [
-                { x: gridAreaX,         y: gridAreaY,         w: quadW, h: quadH },
-                { x: gridAreaX + quadW, y: gridAreaY,         w: quadW, h: quadH },
-                { x: gridAreaX,         y: gridAreaY + quadH, w: quadW, h: quadH },
-                { x: gridAreaX + quadW, y: gridAreaY + quadH, w: quadW, h: quadH }
-            ];
-        }
+function getSlotPositions(gridAreaX, gridAreaY, gridAreaWidth, gridAreaHeight, layout, slots) {
+    // If explicit slot definitions exist, use them (most flexible)
+    if (slots && slots.length > 0) {
+        return slots.map(s => ({
+            x: gridAreaX + s.xPct * gridAreaWidth,
+            y: gridAreaY + s.yPct * gridAreaHeight,
+            w: s.wPct * gridAreaWidth,
+            h: s.hPct * gridAreaHeight
+        }));
     }
+    // Otherwise fall back to auto layouts
+    if (layout === "2-horizontal") {
+        const slotW = gridAreaWidth / 2;
+        return [
+            { x: gridAreaX,         y: gridAreaY, w: slotW, h: gridAreaHeight },
+            { x: gridAreaX + slotW, y: gridAreaY, w: slotW, h: gridAreaHeight }
+        ];
+    } else if (layout === "2-vertical") {
+        const slotH = gridAreaHeight / 2;
+        return [
+            { x: gridAreaX, y: gridAreaY,          w: gridAreaWidth, h: slotH },
+            { x: gridAreaX, y: gridAreaY + slotH,  w: gridAreaWidth, h: slotH }
+        ];
+    } else {
+        // Default: 2x2 grid (existing behaviour, unchanged)
+        const quadW = gridAreaWidth / 2;
+        const quadH = gridAreaHeight / 2;
+        return [
+            { x: gridAreaX,         y: gridAreaY,         w: quadW, h: quadH },
+            { x: gridAreaX + quadW, y: gridAreaY,         w: quadW, h: quadH },
+            { x: gridAreaX,         y: gridAreaY + quadH, w: quadW, h: quadH },
+            { x: gridAreaX + quadW, y: gridAreaY + quadH, w: quadW, h: quadH }
+        ];
+    }
+}
 
     // --- Live Preview Drawing ---
     function drawLivePreview() {
@@ -554,7 +562,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const gridAreaX=margins.left; const gridAreaY=margins.top; const gridAreaWidth=canvasW-margins.left-margins.right; const gridAreaHeight=canvasH-margins.top-margins.bottom;
             if (gridAreaWidth<=0 || gridAreaHeight<=0) { liveCtx.drawImage(templateImageObject, 0, 0, canvasW, canvasH); console.warn("Preview Invalid grid"); liveCtx.strokeStyle='rgba(255,0,0,0.7)'; liveCtx.lineWidth=4; liveCtx.strokeRect(gridAreaX,gridAreaY,gridAreaWidth,gridAreaHeight); return; }
             const layout = activeTemplateSettings ? activeTemplateSettings.layout : undefined;
-            const slots = getSlotPositions(gridAreaX, gridAreaY, gridAreaWidth, gridAreaHeight, layout);
+            const slots = getSlotPositions(gridAreaX, gridAreaY, gridAreaWidth, gridAreaHeight, layout, activeTemplateSettings?.slots);
             photoImageObjects.forEach((img,i)=>{ if(img && i < slots.length){ const t=imageTransforms[i]; const s=slots[i]; const dX=s.x+padding.left; const dY=s.y+padding.top; const dW=s.w-padding.left-padding.right; const dH=s.h-padding.top-padding.bottom; if(dW>0 && dH>0) drawImageCover(liveCtx,img,dX,dY,dW,dH,t.offsetX,t.offsetY,t.scale); } });
             liveCtx.drawImage(templateImageObject, 0, 0, canvasW, canvasH);
         }
