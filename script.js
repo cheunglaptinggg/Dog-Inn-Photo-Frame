@@ -132,6 +132,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 { xPct: 0.412, yPct: 0.000, wPct: 0.588, hPct: 0.41 },
                 { xPct: 0.000, yPct: 0.596, wPct: 0.588, hPct: 0.41 }
             ]
+        },
+        {
+            name: "Desserts",
+            url: "templates/doginn-template-desserts_top.png",  // the full design as overlay
+             margins: { top: 150, bottom: 150, left: 65 , right: 65 },
+             padding: { top: 80, bottom: 80, left: 80, right: 80 },
+           background: { type: 'image', url: 'templates/doginn-template-desserts_bot.png'} ,
         }
     ];
 
