@@ -120,16 +120,17 @@ document.addEventListener('DOMContentLoaded', () => {
              padding: { top: 50, bottom: 50, left: 50, right: 50 },
              background: { type: 'image', url: 'templates/doginn-template-strawberry_bot.png' } // 
          },
+
         {
             name: "Beach",
-            url: "templates/doginn-template-beach_top.png",
+            url: "templates/doginn-template-beach_top.png",  // the full design as overlay
             margins: { top: 228, bottom: 433, left: 199, right: 201 },
             padding: { top: 0, bottom: 0, left: 0, right: 0 },
-            background: { type: 'image', url: 'templates/doginn-template-beach_bot.png' },
+            // NO background property — photos draw first, then _top.png overlays on top
             layout: "2-custom",
             slots: [
-                { xPct: 0.412, yPct: 0.000, wPct: 0.588, hPct: 0.356 },  // top-right frame
-                { xPct: 0.000, yPct: 0.596, wPct: 0.588, hPct: 0.404 }   // bottom-left frame
+                { xPct: 0.412, yPct: 0.000, wPct: 0.588, hPct: 0.356 },
+                { xPct: 0.000, yPct: 0.596, wPct: 0.588, hPct: 0.404 }
             ]
         }
     ];
