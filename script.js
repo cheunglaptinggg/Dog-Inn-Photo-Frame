@@ -129,8 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
            background: { type: 'image', url: 'templates/doginn-template-beach_bot.png'} ,
             layout: "2-custom",
             slots: [
-                { xPct: 0.412, yPct: 0.000, wPct: 0.588, hPct: 0.4 },
-                { xPct: 0.000, yPct: 0.596, wPct: 0.588, hPct: 0.4 }
+                { xPct: 0.412, yPct: 0.000, wPct: 0.588, hPct: 0.41 },
+                { xPct: 0.000, yPct: 0.596, wPct: 0.588, hPct: 0.41 }
             ]
         }
     ];
