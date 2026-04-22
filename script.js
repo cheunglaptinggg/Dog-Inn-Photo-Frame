@@ -129,16 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
            background: { type: 'image', url: 'templates/doginn-template-beach_bot.png'} ,
             layout: "2-custom",
             slots: [
-                { xPct: 0.412, yPct: 0.000, wPct: 0.588, hPct: 0.356 },
-                { xPct: 0.000, yPct: 0.596, wPct: 0.588, hPct: 0.404 }
+                { xPct: 0.412, yPct: 0.000, wPct: 0.588, hPct: 0.4 },
+                { xPct: 0.000, yPct: 0.596, wPct: 0.588, hPct: 0.4 }
             ]
-        },
-        {
-            name: "Beach-test",
-            url: "templates/doginn-template-beach_top.png",  // the full design as overla
-             margins: { top: 350, bottom: 80, left: 65 , right: 65 },
-             padding: { top: 50, bottom: 50, left: 50, right: 50 },
-           background: { type: 'image', url: 'templates/doginn-template-beach_bot.png'} ,
         }
     ];
 
