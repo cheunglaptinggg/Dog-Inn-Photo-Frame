@@ -395,14 +395,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('[handlePresetChange (Fetch)] Loading preset:', preset.name);
                 setMarginInputs(preset.margins, true); // Set margin inputs visually FIRST
                 statusElem.textContent = `Loading ${preset.name}...`; generateBtn.disabled = true; templateFile = preset.url;
-                activeTemplateSettings = { // Initialize state object SECOND
-                     type: 'preset', url: preset.url,
-                     margins: { ...preset.margins },
-                     padding: { ...(preset.padding || { top:0, bottom:0, left:0, right:0 }) },
-                     background: preset.background ? { ...preset.background } : null,
-                     layout: preset.layout || undefined,                                   // ← ADD THIS
-                     slots: preset.slots ? preset.slots.map(s => ({ ...s })) : undefined  // ← ADD THIS
-                };
+                  activeTemplateSettings = {
+                 type: 'preset', url: preset.url,
+                 margins: { ...preset.margins },
+                 padding: { ...(preset.padding || { top:0, bottom:0, left:0, right:0 }) },
+                 background: preset.background ? { ...preset.background } : null,
+                 layout: preset.layout || undefined,                                    // ← ADD
+                 slots: preset.slots ? preset.slots.map(s => ({ ...s })) : undefined   // ← ADD
+            };
 
                 let templateLoadPromise = null;
                 let backgroundLoadPromise = Promise.resolve(true); // Default
