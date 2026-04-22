@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: "Love,DogInn",
             url: "templates/doginn-template-love_top.png",  // the full design as overlay
              margins: { top: 50, bottom: 350, left: 50 , right: 50 },
-             padding: { top: 80, bottom: 80, left: 20, right: 20 },
+             padding: { top: 20, bottom: 30, left: 20, right: 20 },
            background: { type: 'image', url: 'templates/doginn-template-love_bot.png'} ,
         }
     ];
