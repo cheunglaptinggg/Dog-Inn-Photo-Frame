@@ -398,8 +398,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 activeTemplateSettings = { // Initialize state object SECOND
                      type: 'preset', url: preset.url,
                      margins: { ...preset.margins },
-                     padding: { ...(preset.padding || { top:0, bottom:0, left:0, right:0 }) }, // Ensure padding exists
-                     background: preset.background ? { ...preset.background } : null
+                     padding: { ...(preset.padding || { top:0, bottom:0, left:0, right:0 }) },
+                     background: preset.background ? { ...preset.background } : null,
+                     layout: preset.layout || undefined,                                   // ← ADD THIS
+                     slots: preset.slots ? preset.slots.map(s => ({ ...s })) : undefined  // ← ADD THIS
                 };
 
                 let templateLoadPromise = null;
@@ -594,8 +596,7 @@ function getSlotPositions(gridAreaX, gridAreaY, gridAreaWidth, gridAreaHeight, l
                 const gridAreaX=margins.left; const gridAreaY=margins.top; const gridAreaWidth=finalW-margins.left-margins.right; const gridAreaHeight=finalH-margins.top-margins.bottom;
                 if (gridAreaWidth<=0 || gridAreaHeight<=0) { throw new Error(`Invalid grid: ${gridAreaWidth}x${gridAreaHeight}`); }
                 const layout = activeTemplateSettings ? activeTemplateSettings.layout : undefined;
-                const slots = getSlotPositions(gridAreaX, gridAreaY, gridAreaWidth, gridAreaHeight, layout);
-                photoImageObjects.forEach((img,i)=>{ if(img && i < slots.length){ const t=imageTransforms[i]; const s=slots[i]; const dX=s.x+padding.left; const dY=s.y+padding.top; const dW=s.w-padding.left-padding.right; const dH=s.h-padding.top-padding.bottom; if(dW>0&&dH>0) drawImageCover(ctx,img,dX,dY,dW,dH,t.offsetX,t.offsetY,t.scale); } });
+                const slots = getSlotPositions(gridAreaX, gridAreaY, gridAreaWidth, gridAreaHeight, layout, activeTemplateSettings?.slots);                photoImageObjects.forEach((img,i)=>{ if(img && i < slots.length){ const t=imageTransforms[i]; const s=slots[i]; const dX=s.x+padding.left; const dY=s.y+padding.top; const dW=s.w-padding.left-padding.right; const dH=s.h-padding.top-padding.bottom; if(dW>0&&dH>0) drawImageCover(ctx,img,dX,dY,dW,dH,t.offsetX,t.offsetY,t.scale); } });
                 ctx.drawImage(templateImageObject, 0, 0, canvas.width, canvas.height);
                 // Export JPEG
                 canvas.toBlob((blob) => { if (!blob) throw new Error('Blob fail.'); const objectUrl = URL.createObjectURL(blob); downloadLink.href = objectUrl; downloadLink.dataset.objectUrl = objectUrl; downloadLink.style.display = 'inline-block'; resultImage.src = objectUrl; resultImage.style.display = 'block'; if (mobileSaveHint) mobileSaveHint.style.display = 'block'; statusElem.textContent = 'Generated!'; updateGenerateButtonState(); }, 'image/jpeg', 0.9);
