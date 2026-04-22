@@ -139,6 +139,13 @@ document.addEventListener('DOMContentLoaded', () => {
              margins: { top: 120, bottom: 120, left: 50 , right: 50 },
              padding: { top: 80, bottom: 80, left: 80, right: 80 },
            background: { type: 'image', url: 'templates/doginn-template-desserts_bot.png'} ,
+        },
+            {
+            name: "Love,DogInn",
+            url: "templates/doginn-template-love_top.png",  // the full design as overlay
+             margins: { top: 50, bottom: 350, left: 50 , right: 50 },
+             padding: { top: 80, bottom: 80, left: 20, right: 20 },
+           background: { type: 'image', url: 'templates/doginn-template-love_bot.png'} ,
         }
     ];
 
